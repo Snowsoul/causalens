@@ -133,25 +133,43 @@ function App() {
     <div className="App">
       <TopBar />
       <DropDown onSelect={onDropdownSelect} series={series} />
-      <Row>
-        {!selectedSeries.data.fetching && !selectedSeries.results.fetching ? (
-          <PredictionsPlot
-            data={{
-              data: selectedSeries.data.list,
-              results: selectedSeries.results.list,
-            }}
-          />
-        ) : (
-          <>Fetching....</>
-        )}
-
-        <FeatureImportancesChart />
-      </Row>
-      <Row>
-        <ModelDetails />
-        <ModelDetails />
-        <ModelDetails />
-      </Row>
+      {!selectedSeries.data.fetching && !selectedSeries.results.fetching ? (
+        <>
+          <Row>
+            <PredictionsPlot
+              data={{
+                data: selectedSeries.data.list,
+                results: selectedSeries.results.list,
+              }}
+            />
+            <FeatureImportancesChart
+              data={{
+                results: selectedSeries.results.list,
+              }}
+            />
+          </Row>
+          <Row>
+            {/* Commented as they were breaking the app due to some data being undefined */}
+            {/* <ModelDetails
+              title="Model Details"
+              headers={["Property", "Value"]}
+              data={selectedSeries.results.list.modelSummary || null}
+            /> */}
+            {/* <ModelDetails
+              title="Model Details"
+              headers={["Property", "Value"]}
+              data={{ results: selectedSeries.results.list["scoring_metrics"] }}
+            />
+            <ModelDetails
+              title="Confusion Metric"
+              headers={["", "Property", "Value"]}
+              data={{ results: selectedSeries.results.list.confusionMetric }}
+            /> */}
+          </Row>
+        </>
+      ) : (
+        <Row>Fetching....</Row>
+      )}
     </div>
   );
 }

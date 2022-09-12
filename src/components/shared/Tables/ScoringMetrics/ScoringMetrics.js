@@ -3,21 +3,20 @@ import ModelDetailsStyled, {
   ModelDetailsTableStyled,
 } from "./ModelDetails.styled";
 
-function ModelDetails({ data, title = "Add Table Title", headers = [] }) {
-  if (!data) return <ModelDetailsStyled />;
+function ModelDetails({ data }) {
+  if (!data || !data.results || !data.results.modelSummary)
+    return <ModelDetailsStyled />;
 
-  const table = data;
+  const table = data.results.modelSummary;
   return (
     <ModelDetailsStyled>
-      {title}
       <ModelDetailsTableStyled>
         <tr>
-          {headers.map((header) => (
-            <td>{header}</td>
-          ))}
+          <td>Property</td>
+          <td>Value</td>
         </tr>
 
-        {Object.keys(data.modelSummary).map((item) => (
+        {Object.keys(data.results.modelSummary).map((item) => (
           <tr>
             <td>{item}</td>
             <td>{table[item]}</td>

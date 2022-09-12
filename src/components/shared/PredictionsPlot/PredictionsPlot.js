@@ -26,14 +26,6 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  zoom: {
-    enabled: true,
-    mode: "x",
-  },
-  pan: {
-    enabled: true,
-    mode: "x",
-  },
   plugins: {
     legend: {
       position: "top",
@@ -80,13 +72,11 @@ function formatChartData(data = [], results) {
     const item = data[i];
     const [date, yValue] = Object.keys(item);
 
-    // console.log(predictions);
     const predictionItem = predictions.find((predItem) => {
       const [date2, yValue2] = Object.keys(predItem);
       return predItem[date2] === item[date];
     });
 
-    console.log("prediction item", predictionItem);
     const [date2, yValue2] = Object.keys(predictionItem);
 
     if (i === 0) {
@@ -101,8 +91,6 @@ function formatChartData(data = [], results) {
     label2Values.push(predictionItem[yValue2]);
   }
 
-  console.log(data);
-
   return {
     labels: label1Dates,
     datasets: [
@@ -115,7 +103,7 @@ function formatChartData(data = [], results) {
       {
         label: label2Name,
         data: label2Values,
-        borderColor: "#00DAC6",
+        borderColor: "rgba(0, 218, 196, 0.5)",
         backgroundColor: "rgba(0, 218, 196, 0.5)",
       },
     ],

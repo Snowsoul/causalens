@@ -51,18 +51,35 @@ export const data = {
       borderColor: "#BB86FC",
       backgroundColor: "rgba(187, 134, 252, 0.5)",
     },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: "#00DAC6",
-      backgroundColor: "rgba(0, 218, 196, 0.5)",
-    },
   ],
 };
-function FeatureImportancesChart() {
+
+function formatChartData(results) {
+  const { featureImportance } = results;
+  console.log("featureImportance", featureImportance);
+
+  let labelNames = Object.keys(featureImportance);
+  let labelValues = Object.values(featureImportance);
+
+  return {
+    labels: labelNames,
+    datasets: [
+      {
+        label: "Feature Importances",
+        data: labelValues,
+        borderColor: "#BB86FC",
+        backgroundColor: "rgba(187, 134, 252, 0.5)",
+      },
+    ],
+  };
+}
+
+function FeatureImportancesChart({ data: { results = {} } }) {
+  if (!results.featureImportance) return <FeatureImportancesChartStyled />;
+
   return (
     <FeatureImportancesChartStyled>
-      <Bar options={options} data={data} />
+      <Bar options={options} data={formatChartData(results)} />
     </FeatureImportancesChartStyled>
   );
 }
