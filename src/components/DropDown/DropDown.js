@@ -8,13 +8,21 @@ const options = [
   { value: "vanilla", label: "Vanilla" },
 ];
 
-function DropDown() {
+function formatSeries(series = []) {
+  return series.map((item, index) => ({ value: index, label: item }));
+}
+
+function DropDown({ series: { list, fetching }, onSelect }) {
   return (
     <DropDownStyled>
       <Select
+        placeholder={fetching ? "Loading Series..." : "Select Series"}
         className="react-select-container"
         classNamePrefix="react-select"
-        options={options}
+        options={formatSeries(list)}
+        onChange={(item) => {
+          onSelect({ item: item.label, index: item.value });
+        }}
       />
     </DropDownStyled>
   );

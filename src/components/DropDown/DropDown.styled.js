@@ -15,6 +15,9 @@ const DropDownStyled = styled.div`
       background-color: transparent;
       border: 0;
     }
+    .react-select__single-value {
+      color: hsl(0, 0%, 70%);
+    }
   }
 `;
 
