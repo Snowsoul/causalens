@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TopBar from "./components/TopBar/TopBar";
+import DropDown from "./components/DropDown/DropDown";
+import FeatureImportancesChart from "./components/shared/FeatureImportancesChart/FeatureImportancesChart";
+import PredictionsPlot from "./components/shared/PredictionsPlot/PredictionsPlot";
+import Row from "./components/shared/Row.styled";
+import ModelDetails from "./components/shared/Tables/ModelDetails/ModelDetails";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TopBar />
+      <DropDown />
+      <Row>
+        <PredictionsPlot />
+        <FeatureImportancesChart />
+      </Row>
+      <Row>
+        <ModelDetails />
+        <ModelDetails />
+        <ModelDetails />
+      </Row>
     </div>
   );
 }
